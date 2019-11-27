@@ -253,14 +253,7 @@ public class ParallelMultiInstanceBehavior extends MultiInstanceActivityBehavior
     }
 
     if (deleteExecution) {
-        boolean isActiveElement = parentExecution.isActive();
-        executionEntityManager.deleteExecutionAndRelatedData(parentExecution, null, false);
-        if (isActiveElement) {
-            commandContext.getEventDispatcher().dispatchEvent(ActivitiEventBuilder.createActivityCancelledEvent(
-                    parentExecution,
-                    "Multi-instance complete condition expression passed"
-            ));
-        }
+        executionEntityManager.deleteExecutionAndRelatedData(parentExecution, null, true);
     }
   }
 
